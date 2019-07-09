@@ -1,64 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bdouenia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/13 17:39:20 by bdouenia          #+#    #+#             */
+/*   Updated: 2017/08/13 21:31:44 by bdouenia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int		ft_putchar(char c);
+
 void	ft_putstr(char *str)
 {
 	int i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		ft_putchar(str[i]);
 		i++;
 	}
 }
 
-int		ft_strcmp(char *s1, char *s2)
+char	**swap(char **av, int i)
 {
-	int	i;
+	char *tmp;
 
-	i = 0;
-	while (s1[i] && s1[i] == s2[i])
-		i++;
-	return ((char)s1[i] - (char)s2[i]);
+	tmp = av[i];
+	av[i] = av[i + 1];
+	av[i + 1] = tmp;
+	return (av);
 }
-char **ft_sort_params(char **tab, int i)
-{
-	int a;
-	int b;
-	int c;
-	char *str;
 
-	str = "ok";
-	c = 1;
-	a = 0;
-	b = 0;
-	while (tab[a])
+char	**pre_swap(char **av, int i, int n, int ac)
+{
+	while (i + 1 < ac)
 	{
-		b = 0;
-		c = 1;
-		while (b < i)
+		if (av[i][n] == '\0')
 		{
-			if (ft_strcmp(tab[a], tab[b]) > 0)
-				{
-					str = tab[a];
-					tab[a] = tab[b];
-					tab[b] = str;
-				}
-			b++;
+			i++;
+			n = 0;
 		}
-		a++;
+		else if (av[i][n] == av[i + 1][n])
+			n++;
+		else if (av[i][n] < av[i + 1][n])
+		{
+			i++;
+			n = 0;
+		}
+		else
+		{
+			av = swap(av, i);
+			i = 1;
+			n = 0;
+		}
 	}
-	return (tab);
+	return (av);
 }
 
 int		main(int ac, char **av)
 {
-	int i;
-	char **rev;
+	int		i;
+	int		n;
+	char	**res;
 
-	i = 0;
-	rev = ft_sort_params(av, ac);
+	i = 1;
+	n = 0;
+	res = pre_swap(av, i, n, ac);
 	while (i < ac)
 	{
-		ft_putstr(rev[i]);
+		ft_putstr(av[i]);
+		ft_putchar('\n');
 		i++;
 	}
 }
