@@ -1,0 +1,7 @@
+Credentials cache: API:57093
+        Principal: bedoueni@S19.BE
+
+  Issued                Expires               Principal
+Jul  1 20:11:30 2019  Jul  2 06:11:30 2019  krbtgt/S19.BE@S19.BE
+Jul  1 20:11:31 2019  Jul  2 06:11:30 2019  ldap/ldap-master.s19.be@S19.BE
+Jul  1 20:11:31 2019  Jul  2 06:11:30 2019  HTTP/san-ssd.s19.be@S19.BE
